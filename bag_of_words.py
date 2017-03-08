@@ -3,6 +3,7 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.stem.lancaster import LancasterStemmer
+from sklearn.feature_extraction.text import CountVectorizer
 
 
 def tokenize_string(raw_str):
@@ -39,3 +40,19 @@ def stem_lancaster(tokens):
 def remove_short_words(tokens, threshold=2):
     filtered_tokens = filter(lambda token: len(token) > threshold, tokens)
     return list(filtered_tokens)
+
+
+def create_bag_of_words(list_of_strings):
+    vectorizer = CountVectorizer(analyzer="word",
+                                 tokenizer=None,
+                                 preprocessor=None,
+                                 stop_words=None,
+                                 max_features=5000)
+
+    features = vectorizer.fit_transform(list_of_strings)
+    features = features.toarray()
+    vocab = vectorizer.get_feature_names()
+    print('bag of words')
+    print(vocab)
+    print(features[0])
+    print(features[1])

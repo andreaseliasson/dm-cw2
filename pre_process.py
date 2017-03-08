@@ -3,6 +3,7 @@ import re
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 
+
 def get_sub_dir(root_dir):
     sub_dirs = []
     for root, dir_names, file_names in os.walk(root_dir):
