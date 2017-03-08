@@ -1,6 +1,7 @@
 from pre_process import *
 from bag_of_words import *
 from helpers import tokens_to_string
+from tf_idf import *
 
 if __name__ == "__main__":
     parse_html = False
@@ -30,5 +31,9 @@ if __name__ == "__main__":
             stemmed_docs.append(stemmed_doc)
         print(stemmed_docs)
 
+        testing_list_of_strings = ['This is a string', 'This is another string string string yes']
+
         docs_as_strings = tokens_to_string(stemmed_docs)
         bag_of_words = create_bag_of_words(docs_as_strings)
+
+        tf_idf_weights = create_tf_idf(docs_as_strings)

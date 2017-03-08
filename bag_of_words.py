@@ -47,7 +47,7 @@ def create_bag_of_words(list_of_strings):
                                  tokenizer=None,
                                  preprocessor=None,
                                  stop_words=None,
-                                 max_features=5000)
+                                 max_features=50)
 
     features = vectorizer.fit_transform(list_of_strings)
     features = features.toarray()
