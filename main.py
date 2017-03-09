@@ -31,9 +31,15 @@ if __name__ == "__main__":
             stemmed_docs.append(stemmed_doc)
         print(stemmed_docs)
 
-        testing_list_of_strings = ['This is a string', 'This is another string string string yes']
+        testing_list_of_strings = ['This is a string', 'This is another string string string yes', 'another doc']
 
         docs_as_strings = tokens_to_string(stemmed_docs)
+
+        # Bag of words weights matrix
         bag_of_words = create_bag_of_words(docs_as_strings)
 
-        tf_idf_weights = create_tf_idf(docs_as_strings)
+        # Tf-Idf weights matrix
+        tf_idf_weights = create_tf_idf(testing_list_of_strings)
+
+        # Cosine similarities
+        cos_similarity = pair_wise_cosine_similarity(tf_idf_weights)
