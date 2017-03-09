@@ -2,6 +2,7 @@ from pre_process import *
 from bag_of_words import *
 from helpers import tokens_to_string
 from tf_idf import *
+from clustering import *
 
 if __name__ == "__main__":
     parse_html = False
@@ -50,3 +51,5 @@ if __name__ == "__main__":
     # Get top k significant terms for a single doc
     k_most_sign_term_for_doc = get_k_most_significant_terms_for_doc(tf_idf_weights[0], 3, vectorizer)
 
+    # Perform agglomerative clustering
+    clusters = compute_agglomerative_clustering(2, 'average', 'cosine', tf_idf_weights)
