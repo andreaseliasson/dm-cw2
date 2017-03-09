@@ -20,6 +20,8 @@ def create_tf_idf(list_of_strings):
 
 
 def pair_wise_cosine_similarity(docs_matrix):
+    # Using L2-normalized data
+    # Function is equivalent to linear-kernel
     cos_similarity = cosine_similarity(docs_matrix)
     print('cosine similarities')
     print(cos_similarity)
