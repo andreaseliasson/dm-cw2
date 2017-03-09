@@ -56,3 +56,6 @@ if __name__ == "__main__":
 
     # Get cluster indices
     cluster_indices = get_indices_of_clusters(clusters)
+
+    # Get word count per cluster
+    word_count_per_cluster = get_word_count_per_cluster(cluster_indices, vectorizer, tf_idf_weights)
