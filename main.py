@@ -32,7 +32,7 @@ if __name__ == "__main__":
         stemmed_docs.append(stemmed_doc)
     print(stemmed_docs)
 
-    testing_list_of_strings = ['This is a string', 'This is another string string string yes', 'another doc']
+    testing_list_of_strings = ['This is a string', 'This is another string string string yes', 'another doc', 'different stuff']
 
     docs_as_strings = tokens_to_string(stemmed_docs)
 
@@ -53,3 +53,6 @@ if __name__ == "__main__":
 
     # Perform agglomerative clustering
     clusters = compute_agglomerative_clustering(2, 'average', 'cosine', tf_idf_weights)
+
+    # Get cluster indices
+    cluster_indices = get_indices_of_clusters(clusters)
