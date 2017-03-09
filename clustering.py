@@ -1,4 +1,6 @@
 from sklearn.cluster import AgglomerativeClustering
+from matplotlib import pyplot as plt
+from scipy.cluster import hierarchy
 from tf_idf import *
 
 
@@ -37,3 +39,14 @@ def get_word_count_per_cluster(cluster_indices, vectorizer, weights_matrix):
     print('cluster word count')
     print(cluster_word_count)
     return cluster_word_count
+
+
+def draw_dendrogram(weights_matrix, linkage='average', affinity='cosine'):
+    print('dendrogram')
+    Z = hierarchy.linkage(weights_matrix, linkage, affinity)
+    plt.figure()
+    plt.title('Hierarchical Clustering Dendrogram')
+    plt.xlabel('feature index')
+    plt.ylabel('distance')
+    hierarchy.dendrogram(Z)
+    plt.show()

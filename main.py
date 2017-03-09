@@ -59,3 +59,6 @@ if __name__ == "__main__":
 
     # Get word count per cluster
     word_count_per_cluster = get_word_count_per_cluster(cluster_indices, vectorizer, tf_idf_weights)
+
+    # Draw dendrogram
+    draw_dendrogram(tf_idf_weights)
