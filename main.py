@@ -67,3 +67,6 @@ if __name__ == "__main__":
     # Apply multi-dimensional scaling (MDS) and plot the result
     mds_pos = apply_mds(tf_idf_weights, 2, 'precomputed')
     plot_mds(mds_pos)
+
+    # Plot the points with their cluster labels
+    plot_mds_with_cluster_labels(mds_pos, cluster_indices)
