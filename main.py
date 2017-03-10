@@ -3,6 +3,7 @@ from bag_of_words import *
 from helpers import tokens_to_string
 from tf_idf import *
 from clustering import *
+from mds import *
 
 if __name__ == "__main__":
     parse_html = False
@@ -61,4 +62,7 @@ if __name__ == "__main__":
     word_count_per_cluster = get_word_count_per_cluster(cluster_indices, vectorizer, tf_idf_weights)
 
     # Draw dendrogram
-    draw_dendrogram(tf_idf_weights)
+    # draw_dendrogram(tf_idf_weights)
+
+    # Apply multi-dimensional scaling (MDS)
+    mds = apply_mds(tf_idf_weights, 2, 'precomputed')
