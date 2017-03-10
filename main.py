@@ -64,6 +64,6 @@ if __name__ == "__main__":
     # Draw dendrogram
     # draw_dendrogram(tf_idf_weights)
 
-    # Apply multi-dimensional scaling (MDS)
+    # Apply multi-dimensional scaling (MDS) and plot the result
     mds_pos = apply_mds(tf_idf_weights, 2, 'precomputed')
     plot_mds(mds_pos)
