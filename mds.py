@@ -38,20 +38,16 @@ def plot_mds(pos):
 
 
 def plot_mds_with_cluster_labels(pos, cluster_indices):
-    print("positions")
     np_pos = np.array(pos)
-    print(np_pos)
     fig, ax = plt.subplots()
-    n_colors = len(cluster_indices)
     distinct_colors = UNIQUE_COLORS
-    print(distinct_colors)
     for idx, cluster in enumerate(cluster_indices):
         x_cluster = []
         y_cluster = []
         for i in cluster:
             x_cluster.append(np_pos[:, 0][i])
             y_cluster.append(np_pos[:, 1][i])
-        ax.scatter(x_cluster, y_cluster, color=UNIQUE_COLORS[idx])
+        ax.scatter(x_cluster, y_cluster, color=distinct_colors[idx])
 
     # Add doc labels
     for i, n in enumerate(range(len(np_pos))):
