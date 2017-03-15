@@ -35,13 +35,18 @@ if __name__ == "__main__":
 
     testing_list_of_strings = ['This is a string', 'This is another string string string yes', 'another doc', 'different stuff']
 
+    # Create a list of docs where each doc is represented as a long string with eacg stemmed word separated by a space
     docs_as_strings = tokens_to_string(stemmed_docs)
+    print("docs as strings")
+    print(len(docs_as_strings[0]))
+    print(docs_as_strings)
 
     # Bag of words weights matrix
     bag_of_words = create_bag_of_words(docs_as_strings)
 
-    # Tf-Idf weights matrix
-    tf_idf_weights, vectorizer = create_tf_idf(testing_list_of_strings)
+    # Tf-Idf weights matrix. We can alternate between the testing strings (testing_list_of_strings)
+    # or the real docs (docs as strings)
+    tf_idf_weights, vectorizer = create_tf_idf(docs_as_strings)
 
     # Cosine similarities
     cos_similarity = pair_wise_cosine_similarity(tf_idf_weights)

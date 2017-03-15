@@ -6,16 +6,23 @@ from nltk.stem.lancaster import LancasterStemmer
 from sklearn.feature_extraction.text import CountVectorizer
 
 
+THRESHOLD = 50000
+
+
 def tokenize_string(raw_str):
     raw_str_lower = raw_str.lower()
-    tokens = word_tokenize(raw_str_lower[:1400])  # Restrict number of tokens for testing purposes
+    print('string length')
+    print(len(raw_str_lower))
+    tokens = word_tokenize(raw_str_lower[:THRESHOLD])  # Restrict number of tokens for testing purposes
     return tokens
 
 
 def tokenize_remove_punct(raw_str):
     raw_str_lower = raw_str.lower()
     tokenizer = RegexpTokenizer(r'\w+')
-    tokens = tokenizer.tokenize(raw_str_lower[:1400])  # Restrict number of tokens for testing purposes
+    print('string length')
+    print(len(raw_str_lower))
+    tokens = tokenizer.tokenize(raw_str_lower[:THRESHOLD])  # Restrict number of tokens for testing purposes
     return tokens
 
 
@@ -27,6 +34,7 @@ def filter_words(tokens):
 
 def stem_porter(tokens):
     ps = PorterStemmer()
+    print(tokens)
     stemmed_tokens = [ps.stem(token) for token in tokens]
     return stemmed_tokens
 
@@ -37,7 +45,7 @@ def stem_lancaster(tokens):
     return stemmed_tokens
 
 
-def remove_short_words(tokens, threshold=2):
+def remove_short_words(tokens, threshold=3):
     filtered_tokens = filter(lambda token: len(token) > threshold, tokens)
     return list(filtered_tokens)
 
