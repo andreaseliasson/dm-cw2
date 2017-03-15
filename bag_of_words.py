@@ -1,3 +1,5 @@
+import re
+import nltk
 from nltk import word_tokenize
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
@@ -25,6 +27,19 @@ def tokenize_remove_punct(raw_str):
     print(len(raw_str_lower))
     tokens = tokenizer.tokenize(raw_str_lower[::])  # Restrict number of tokens for testing purposes
     return tokens
+
+
+def tokenize_and_stem(text):
+    stemmer = SnowballStemmer("english")
+    # first tokenize by sentence, then by word to ensure that punctuation is caught as it's own token
+    tokens = [word for sent in nltk.sent_tokenize(text) for word in nltk.word_tokenize(sent)]
+    filtered_tokens = []
+    # filter out any tokens not containing letters (e.g., numeric tokens, raw punctuation)
+    for token in tokens:
+        if re.search('[a-zA-Z]', token):
+            filtered_tokens.append(token)
+    stems = [stemmer.stem(t) for t in filtered_tokens]
+    return stems
 
 
 def filter_words(tokens):

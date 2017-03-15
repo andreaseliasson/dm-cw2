@@ -1,8 +1,10 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
+from bag_of_words import tokenize_and_stem
 
 
+# The original tf_idf to compare others against
 def create_tf_idf(list_of_strings):
     vectorizer = TfidfVectorizer(analyzer="word",
                                  tokenizer=None,
@@ -11,6 +13,25 @@ def create_tf_idf(list_of_strings):
                                  max_features=50)
 
     feature_matrix = vectorizer.fit_transform(list_of_strings)
+    feature_matrix = feature_matrix.toarray()
+    vocab = vectorizer.get_feature_names()
+    print('tf-idf weights')
+    print(vocab)
+    print(feature_matrix[0])
+    print(feature_matrix[1])
+    return feature_matrix, vectorizer
+
+
+def create_tf_idf_v2(raw_list_of_strings):
+    vectorizer = TfidfVectorizer(analyzer='word',
+                                 max_df=0.8,
+                                 max_features=50,
+                                 min_df=0.2,
+                                 tokenizer=None,
+                                 ngram_range=(1, 2)
+                                 )
+
+    feature_matrix = vectorizer.fit_transform(raw_list_of_strings)
     feature_matrix = feature_matrix.toarray()
     vocab = vectorizer.get_feature_names()
     print('tf-idf weights')

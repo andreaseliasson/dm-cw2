@@ -22,7 +22,7 @@ if __name__ == "__main__":
     tokenized_docs = []
     stemmed_docs = []
 
-    for doc in raw_text_list[::]:  # Restrict to just the first two docs for testing purposes
+    for doc in raw_text_list[:1]:  # Restrict to just the first two docs for testing purposes
         tokenized_doc = tokenize_remove_punct(doc)
         filter_tokenized_doc = filter_words(tokenized_doc)
         filter_tokenized_doc_non_short = remove_short_words(filter_tokenized_doc)
@@ -31,22 +31,28 @@ if __name__ == "__main__":
         # Stemming
         stemmed_doc = stem_porter(filter_tokenized_doc_non_short)
         stemmed_docs.append(stemmed_doc)
-    print(stemmed_docs)
+    # print(stemmed_docs)
 
-    testing_list_of_strings = ['This is a string', 'This is another string string string yes', 'another doc', 'different stuff']
+    testing_list_of_strings = ['This is a string',
+                               'This is another string string string yes',
+                               'another doc not seen',
+                               'completely different stuff']
 
     # Create a list of docs where each doc is represented as a long string with eacg stemmed word separated by a space
     docs_as_strings = tokens_to_string(stemmed_docs)
     print("docs as strings")
-    print(len(docs_as_strings[0]))
-    print(docs_as_strings)
+    # print(len(docs_as_strings[0]))
+    # print(docs_as_strings)
 
     # Bag of words weights matrix
-    bag_of_words = create_bag_of_words(docs_as_strings)
+    # bag_of_words = create_bag_of_words(docs_as_strings)
 
     # Tf-Idf weights matrix. We can alternate between the testing strings (testing_list_of_strings)
     # or the real docs (docs as strings)
-    tf_idf_weights, vectorizer = create_tf_idf(docs_as_strings)
+    # tf_idf_weights, vectorizer = create_tf_idf(testing_list_of_strings)
+
+    # Experiment with different params for computing tf idf raw_text_list[:3]
+    tf_idf_weights, vectorizer = create_tf_idf_v2(testing_list_of_strings)
 
     # Cosine similarities
     cos_similarity = pair_wise_cosine_similarity(tf_idf_weights)
