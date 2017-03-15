@@ -22,7 +22,7 @@ if __name__ == "__main__":
     tokenized_docs = []
     stemmed_docs = []
 
-    for doc in raw_text_list[:3]:  # Restrict to just the first two docs for testing purposes
+    for doc in raw_text_list[::]:  # Restrict to just the first two docs for testing purposes
         tokenized_doc = tokenize_remove_punct(doc)
         filter_tokenized_doc = filter_words(tokenized_doc)
         filter_tokenized_doc_non_short = remove_short_words(filter_tokenized_doc)
@@ -67,7 +67,7 @@ if __name__ == "__main__":
     word_count_per_cluster = get_word_count_per_cluster(cluster_indices, vectorizer, tf_idf_weights)
 
     # Draw dendrogram
-    # draw_dendrogram(tf_idf_weights)
+    draw_dendrogram(tf_idf_weights)
 
     # Apply multi-dimensional scaling (MDS) and plot the result
     mds_pos = apply_mds(tf_idf_weights, 2, 'precomputed')

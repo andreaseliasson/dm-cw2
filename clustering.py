@@ -27,7 +27,7 @@ def get_word_count_per_cluster(cluster_indices, vectorizer, weights_matrix):
         word_count = {}
         for index in cluster:
             # Get most significant terms for each doc in the cluster
-            cluster_words = get_k_most_significant_terms_for_doc(weights_matrix[index], 5, vectorizer)
+            cluster_words = get_k_most_significant_terms_for_doc(weights_matrix[index], 20, vectorizer)
 
             # Count the occurrences of each word throughout all docs in the cluster
             for word in cluster_words:
@@ -46,7 +46,7 @@ def draw_dendrogram(weights_matrix, linkage='average', affinity='cosine'):
     Z = hierarchy.linkage(weights_matrix, linkage, affinity)
     plt.figure()
     plt.title('Hierarchical Clustering Dendrogram')
-    plt.xlabel('feature index')
-    plt.ylabel('distance')
-    hierarchy.dendrogram(Z)
+    plt.ylabel('document index')
+    plt.xlabel('distance')
+    hierarchy.dendrogram(Z, orientation='right')
     plt.show()

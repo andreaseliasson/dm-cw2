@@ -3,10 +3,11 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from nltk.stem.lancaster import LancasterStemmer
+from nltk.stem.snowball import SnowballStemmer
 from sklearn.feature_extraction.text import CountVectorizer
 
 
-THRESHOLD = 50000
+THRESHOLD = 100000
 
 
 def tokenize_string(raw_str):
@@ -22,7 +23,7 @@ def tokenize_remove_punct(raw_str):
     tokenizer = RegexpTokenizer(r'\w+')
     print('string length')
     print(len(raw_str_lower))
-    tokens = tokenizer.tokenize(raw_str_lower[:THRESHOLD])  # Restrict number of tokens for testing purposes
+    tokens = tokenizer.tokenize(raw_str_lower[::])  # Restrict number of tokens for testing purposes
     return tokens
 
 
@@ -41,6 +42,12 @@ def stem_porter(tokens):
 
 def stem_lancaster(tokens):
     ps = LancasterStemmer()
+    stemmed_tokens = [ps.stem(token) for token in tokens]
+    return stemmed_tokens
+
+
+def stem_snowball(tokens):
+    ps = SnowballStemmer('english')
     stemmed_tokens = [ps.stem(token) for token in tokens]
     return stemmed_tokens
 
