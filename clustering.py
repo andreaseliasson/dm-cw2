@@ -1,12 +1,21 @@
 from sklearn.cluster import AgglomerativeClustering
 from matplotlib import pyplot as plt
 from scipy.cluster import hierarchy
+from sklearn.cluster import KMeans
 from tf_idf import *
 
 
 def compute_agglomerative_clustering(n_clusters, linkage, affinity, weights_matrix):
     model = AgglomerativeClustering(n_clusters=n_clusters, linkage=linkage, affinity=affinity)
     model.fit(weights_matrix)
+    print(model.labels_)
+    return model.labels_
+
+
+def compute_k_means_clustering(weights_matrix, n_clusters):
+    model = KMeans(n_clusters)
+    model.fit(weights_matrix)
+    print('k means')
     print(model.labels_)
     return model.labels_
 

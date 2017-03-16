@@ -49,10 +49,10 @@ if __name__ == "__main__":
 
     # Tf-Idf weights matrix. We can alternate between the testing strings (testing_list_of_strings)
     # or the real docs (docs as strings)
-    # tf_idf_weights, vectorizer = create_tf_idf(testing_list_of_strings)
+    tf_idf_weights, vectorizer = create_tf_idf(testing_list_of_strings)
 
     # Experiment with different params for computing tf idf raw_text_list[:3]
-    tf_idf_weights, vectorizer = create_tf_idf_v2(testing_list_of_strings)
+    # tf_idf_weights, vectorizer = create_tf_idf_v2(testing_list_of_strings)
 
     # Cosine similarities
     cos_similarity = pair_wise_cosine_similarity(tf_idf_weights)
@@ -65,6 +65,9 @@ if __name__ == "__main__":
 
     # Perform agglomerative clustering
     clusters = compute_agglomerative_clustering(2, 'average', 'cosine', tf_idf_weights)
+
+    # Perform k-means clustering
+    # clusters = compute_k_means_clustering(tf_idf_weights, 2)
 
     # Get cluster indices
     cluster_indices = get_indices_of_clusters(clusters)
