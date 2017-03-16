@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 from tf_idf import *
 
 
-def compute_agglomerative_clustering(n_clusters, linkage, affinity, weights_matrix):
+def compute_agglomerative_clustering(n_clusters, weights_matrix):
     model = AgglomerativeClustering(n_clusters=n_clusters)
     model.fit(weights_matrix)
     print('agglomerative clustering')

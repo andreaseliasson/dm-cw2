@@ -70,7 +70,7 @@ if __name__ == "__main__":
     k_most_sign_term_for_doc = get_k_most_significant_terms_for_doc(tf_idf_weights[0], 10, vectorizer)
 
     # Perform agglomerative clustering
-    clusters = compute_agglomerative_clustering(3, 'average', 'cosine', tf_idf_weights)
+    clusters = compute_agglomerative_clustering(3, tf_idf_weights)
 
     # Perform k-means clustering
     # clusters = compute_k_means_clustering(tf_idf_weights, 3)
