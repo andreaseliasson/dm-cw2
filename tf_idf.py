@@ -22,16 +22,16 @@ def create_tf_idf(list_of_strings):
     return feature_matrix, vectorizer
 
 
-def create_tf_idf_v2(raw_list_of_strings):
+def create_tf_idf_v2(list_of_strings):
     vectorizer = TfidfVectorizer(analyzer='word',
-                                 max_df=0.8,
-                                 max_features=50,
-                                 min_df=0.2,
+                                 # max_df=0.8,
+                                 max_features=200000,
+                                 # min_df=0.1,
                                  tokenizer=None,
                                  ngram_range=(1, 2)
                                  )
 
-    feature_matrix = vectorizer.fit_transform(raw_list_of_strings)
+    feature_matrix = vectorizer.fit_transform(list_of_strings)
     feature_matrix = feature_matrix.toarray()
     vocab = vectorizer.get_feature_names()
     print('tf-idf weights')

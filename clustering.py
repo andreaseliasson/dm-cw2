@@ -36,7 +36,7 @@ def get_word_count_per_cluster(cluster_indices, vectorizer, weights_matrix):
         word_count = {}
         for index in cluster:
             # Get most significant terms for each doc in the cluster
-            cluster_words = get_k_most_significant_terms_for_doc(weights_matrix[index], 3, vectorizer)
+            cluster_words = get_k_most_significant_terms_for_doc(weights_matrix[index], 10, vectorizer)
 
             # Count the occurrences of each word throughout all docs in the cluster
             for word in cluster_words:

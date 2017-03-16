@@ -29,6 +29,15 @@ def tokenize_remove_punct(raw_str):
     return tokens
 
 
+def tokenize_incl_numbers(raw_str):
+    raw_str_lower = raw_str.lower()
+    tokenizer = RegexpTokenizer(r'[A-Za-z0-9]\w+')
+    print('string length')
+    print(len(raw_str_lower))
+    tokens = tokenizer.tokenize(raw_str_lower[::])  # Restrict number of tokens for testing purposes
+    return tokens
+
+
 def tokenize_and_stem(text):
     stemmer = SnowballStemmer("english")
     # first tokenize by sentence, then by word to ensure that punctuation is caught as it's own token
@@ -36,7 +45,7 @@ def tokenize_and_stem(text):
     filtered_tokens = []
     # filter out any tokens not containing letters (e.g., numeric tokens, raw punctuation)
     for token in tokens:
-        if re.search('[a-zA-Z]', token):
+        if re.search('[a-zA-Z0-9]', token):
             filtered_tokens.append(token)
     stems = [stemmer.stem(t) for t in filtered_tokens]
     return stems
