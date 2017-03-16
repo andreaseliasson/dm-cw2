@@ -59,7 +59,7 @@ def filter_words(tokens):
 
 def stem_porter(tokens):
     ps = PorterStemmer()
-    print(tokens)
+    # print(tokens)
     stemmed_tokens = [ps.stem(token) for token in tokens]
     return stemmed_tokens
 

@@ -34,9 +34,11 @@ if __name__ == "__main__":
     # print(stemmed_docs)
 
     testing_list_of_strings = ['This is a 88 string.',
-                               'This is another string string string, yes',
+                               'This is another string, yes',
                                'another doc not seen',
-                               'completely different stuff']
+                               'completely different stuff',
+                               'different then the rest almost yup',
+                               'greece roman war']
 
     # Create a list of docs where each doc is represented as a long string with eacg stemmed word separated by a space
     docs_as_strings = tokens_to_string(stemmed_docs)
@@ -52,10 +54,14 @@ if __name__ == "__main__":
     # tf_idf_weights, vectorizer = create_tf_idf(testing_list_of_strings)
 
     # Experiment with different params for computing tf idf raw_text_list[:3]
+    # tf_idf_weights, vectorizer = create_tf_idf_v2(testing_list_of_strings)
     tf_idf_weights, vectorizer = create_tf_idf_v2(docs_as_strings)
 
     # Cosine similarities
     cos_similarity = pair_wise_cosine_similarity(tf_idf_weights)
+
+    # set dist to pass into mds
+    dist = 1 - pair_wise_cosine_similarity(tf_idf_weights)
 
     # Get top k significant terms for all documents
     # k_most_significant_terms_for_docs = get_k_most_sign_features_for_docs(vectorizer, 3)
@@ -64,10 +70,10 @@ if __name__ == "__main__":
     k_most_sign_term_for_doc = get_k_most_significant_terms_for_doc(tf_idf_weights[0], 10, vectorizer)
 
     # Perform agglomerative clustering
-    clusters = compute_agglomerative_clustering(4, 'average', 'cosine', tf_idf_weights)
+    clusters = compute_agglomerative_clustering(3, 'average', 'cosine', tf_idf_weights)
 
     # Perform k-means clustering
-    # clusters = compute_k_means_clustering(tf_idf_weights, 2)
+    # clusters = compute_k_means_clustering(tf_idf_weights, 3)
 
     # Get cluster indices
     cluster_indices = get_indices_of_clusters(clusters)
@@ -76,10 +82,11 @@ if __name__ == "__main__":
     word_count_per_cluster = get_word_count_per_cluster(cluster_indices, vectorizer, tf_idf_weights)
 
     # Draw dendrogram
-    draw_dendrogram(tf_idf_weights)
+    draw_dendrogram(tf_idf_weights, dist)
 
     # Apply multi-dimensional scaling (MDS) and plot the result
     mds_pos = apply_mds(tf_idf_weights, 2, 'precomputed')
+    # mds_pos = apply_mds(tf_idf_weights, 2)
     plot_mds(mds_pos)
 
     # Plot the points with their cluster labels
