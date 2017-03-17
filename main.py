@@ -4,6 +4,7 @@ from helpers import tokens_to_string
 from tf_idf import *
 from clustering import *
 from mds import *
+from topic_extraction import *
 
 if __name__ == "__main__":
     parse_html = False
@@ -38,7 +39,7 @@ if __name__ == "__main__":
                                'another doc not seen',
                                'completely different stuff',
                                'different then the rest almost yup',
-                               'greece roman war']
+                               'a soldier in 500 bc fought in the roman war and was also a spartan']
 
     # Create a list of docs where each doc is represented as a long string with eacg stemmed word separated by a space
     docs_as_strings = tokens_to_string(stemmed_docs)
@@ -93,3 +94,9 @@ if __name__ == "__main__":
 
     # Plot the points with their cluster labels
     plot_mds_with_cluster_labels(mds_pos, cluster_indices)
+
+    # Extract topics
+    test_doc = [testing_list_of_strings[5]]
+    test_doc = [raw_text_list[0]]
+    get_topics_lda(raw_text_list)
+    # get_topics_nmf(test_doc)
