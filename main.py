@@ -22,7 +22,7 @@ if __name__ == "__main__":
     tokenized_docs = []
     stemmed_docs = []
 
-    for doc in raw_text_list[::]:  # Restrict to just the first two docs for testing purposes
+    for doc in raw_text_list[:1]:  # Restrict to just the first two docs for testing purposes
         tokenized_doc = tokenize_remove_punct(doc)
         filter_tokenized_doc = filter_words(tokenized_doc)
         filter_tokenized_doc_non_short = remove_short_words(filter_tokenized_doc)
@@ -54,8 +54,10 @@ if __name__ == "__main__":
     # tf_idf_weights, vectorizer = create_tf_idf(testing_list_of_strings)
 
     # Experiment with different params for computing tf idf raw_text_list[:3]
-    # tf_idf_weights, vectorizer = create_tf_idf_v2(testing_list_of_strings)
-    tf_idf_weights, vectorizer = create_tf_idf_v2(docs_as_strings)
+    tf_idf_weights, vectorizer = create_tf_idf_v2(testing_list_of_strings)
+    print('tf idf weights')
+    print(tf_idf_weights)
+    # tf_idf_weights, vectorizer = create_tf_idf_v2(docs_as_strings)
 
     # Cosine similarities
     cos_similarity = pair_wise_cosine_similarity(tf_idf_weights)
@@ -67,7 +69,7 @@ if __name__ == "__main__":
     # k_most_significant_terms_for_docs = get_k_most_sign_features_for_docs(vectorizer, 3)
 
     # Get top k significant terms for a single doc
-    k_most_sign_term_for_doc = get_k_most_significant_terms_for_doc(tf_idf_weights[0], 10, vectorizer)
+    k_most_sign_term_for_doc = get_k_most_significant_terms_for_doc(tf_idf_weights[0], 2, vectorizer)
 
     # Perform agglomerative clustering
     clusters = compute_agglomerative_clustering(3, tf_idf_weights)

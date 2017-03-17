@@ -24,9 +24,9 @@ def create_tf_idf(list_of_strings):
 
 def create_tf_idf_v2(list_of_strings):
     vectorizer = TfidfVectorizer(analyzer='word',
-                                 max_df=0.8,
+                                 # max_df=0.8,
                                  max_features=100000,
-                                 min_df=0.2,
+                                 # min_df=0.2,
                                  tokenizer=None,
                                  # ngram_range=(1, 2)
                                  )
@@ -35,6 +35,9 @@ def create_tf_idf_v2(list_of_strings):
     feature_matrix = feature_matrix.toarray()
     print(feature_matrix.shape)
     vocab = vectorizer.get_feature_names()
+    print('vocab')
+    print(vocab)
+    print(feature_matrix[0].argsort()[::-1])
     # print('tf-idf weights')
     # print(vocab)
     # print('feature matrix')
@@ -64,6 +67,7 @@ def get_k_most_sign_features_for_docs(vectorizer, k):
 
 def get_k_most_significant_terms_for_doc(weights_vector, k, vectorizer):
     print('k top doc terms')
+    print(weights_vector)
     indices = weights_vector.argsort()[::-1]
     features = vectorizer.get_feature_names()
     top_features = [features[i] for i in indices[:k]]
