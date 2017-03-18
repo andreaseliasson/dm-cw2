@@ -10,11 +10,13 @@ if __name__ == "__main__":
     parse_html = False
     if parse_html:
         sub_dirs = get_sub_dir('../data/gap-html')
-        text_docs = get_html_files_from_sub_dirs('../data/gap-html', sub_dirs)
+        text_docs = get_html_files_from_sub_dirs('../data/gap-html/', sub_dirs)
         raw_docs = parse_html_files(text_docs)
+        raw_docs_2 = parse_html_files_2(text_docs)
         to_csv(raw_docs)
+        to_csv_2(raw_docs_2)
 
-    raw_docs_df = pd.read_csv('../data/raw_text.csv', usecols=['id', 'raw_text'])
+    raw_docs_df = pd.read_csv('../data/raw_text_2.csv', usecols=['id', 'raw_text'])
     raw_text_list = raw_docs_df['raw_text'].values.tolist()
     print(raw_text_list[0][:10])
     print(len(raw_text_list[0]))

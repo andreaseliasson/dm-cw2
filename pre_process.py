@@ -38,6 +38,28 @@ def parse_html_files(text_docs):
     return raw_docs
 
 
+def parse_html_files_2(text_docs):
+    # pattern = '^[A-Za-z.,:;!?()]+$'
+    raw_docs = []
+    for doc in text_docs:
+        html_text = ''
+        for html_file in doc[1]:
+            html_file_path = '../data/gap-html/' + doc[0] + '/' + html_file
+            html_soup = bs(open(html_file_path), 'html.parser')
+            html_text_arr = ["".join(s.findAll(text=True)) for s in html_soup.findAll('span', {'class': 'ocr_cinfo'})]
+            print(len(html_text_arr))
+            html_text += " ".join([word for word in html_text_arr]) + " "
+            print(doc[0])
+            print(html_file)
+        raw_docs.append((doc[0], html_text))
+    return raw_docs
+
+
 def to_csv(docs):
     pd_frame = pd.DataFrame(docs, columns=['id', 'raw_text'])
     pd_frame.to_csv('../data/raw_text.csv', index=False)
+
+
+def to_csv_2(docs):
+    pd_frame = pd.DataFrame(docs, columns=['id', 'raw_text'])
+    pd_frame.to_csv('../data/raw_text_2.csv', index=False)
