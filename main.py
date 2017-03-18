@@ -23,7 +23,7 @@ if __name__ == "__main__":
     tokenized_docs = []
     stemmed_docs = []
 
-    for doc in raw_text_list[:1]:  # Restrict to just the first two docs for testing purposes
+    for doc in raw_text_list[:6]:  # Restrict to just the first two docs for testing purposes
         tokenized_doc = tokenize_remove_punct(doc)
         filter_tokenized_doc = filter_words(tokenized_doc)
         filter_tokenized_doc_non_short = remove_short_words(filter_tokenized_doc)
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     # tf_idf_weights, vectorizer = create_tf_idf(testing_list_of_strings)
 
     # Experiment with different params for computing tf idf raw_text_list[:3]
-    tf_idf_weights, vectorizer = create_tf_idf_v2(testing_list_of_strings)
+    tf_idf_weights, vectorizer = create_tf_idf_v2(docs_as_strings)
     print('tf idf weights')
     print(tf_idf_weights)
     # tf_idf_weights, vectorizer = create_tf_idf_v2(docs_as_strings)
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     plot_mds_with_cluster_labels(mds_pos, cluster_indices)
 
     # Extract topics
-    test_doc = [testing_list_of_strings[5]]
-    test_doc = [raw_text_list[0]]
-    get_topics_lda(raw_text_list)
+    # test_doc = [testing_list_of_strings[5]]
+    # test_doc = [raw_text_list[0]]
+    # get_topics_lda(raw_text_list)
     # get_topics_nmf(test_doc)

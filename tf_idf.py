@@ -24,7 +24,7 @@ def create_tf_idf(list_of_strings):
 
 def create_tf_idf_v2(list_of_strings):
     vectorizer = TfidfVectorizer(analyzer='word',
-                                 # max_df=0.8,
+                                 max_df=0.8,
                                  max_features=100000,
                                  # min_df=0.2,
                                  tokenizer=None,
