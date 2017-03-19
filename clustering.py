@@ -2,6 +2,7 @@ from sklearn.cluster import AgglomerativeClustering
 from matplotlib import pyplot as plt
 from scipy.cluster.hierarchy import dendrogram, ward
 from sklearn.cluster import KMeans
+from sklearn.metrics.pairwise import euclidean_distances
 from tf_idf import *
 
 
@@ -37,7 +38,7 @@ def get_word_count_per_cluster(cluster_indices, vectorizer, weights_matrix):
         word_count = {}
         for index in cluster:
             # Get most significant terms for each doc in the cluster
-            cluster_words = get_k_most_significant_terms_for_doc(weights_matrix[index], 50, vectorizer)
+            cluster_words = get_k_most_significant_terms_for_doc(weights_matrix[index], 100, vectorizer)
 
             # Count the occurrences of each word throughout all docs in the cluster
             for word in cluster_words:
@@ -53,6 +54,7 @@ def get_word_count_per_cluster(cluster_indices, vectorizer, weights_matrix):
 
 def draw_dendrogram(weights_matrix, dist, linkage='average', affinity='cosine'):
     print('dendrogram')
+    # dist = euclidean_distances(weights_matrix)
     linkage_matrix = ward(dist)
     # Z = dendrogram(linkage_matrix)
     plt.figure()

@@ -25,8 +25,8 @@ if __name__ == "__main__":
     tokenized_docs = []
     stemmed_docs = []
 
-    for doc in raw_text_list[:6]:  # Restrict to just the first two docs for testing purposes
-        tokenized_doc = tokenize_remove_punct(doc)
+    for doc in raw_text_list[::]:  # Restrict to just the first two docs for testing purposes
+        tokenized_doc = tokenize_incl_numbers(doc)
         filter_tokenized_doc = filter_words(tokenized_doc)
         filter_tokenized_doc_non_short = remove_short_words(filter_tokenized_doc)
         tokenized_docs.append(filter_tokenized_doc_non_short)

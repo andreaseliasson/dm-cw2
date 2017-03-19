@@ -1,5 +1,5 @@
 from sklearn import manifold
-from sklearn.metrics import euclidean_distances
+from sklearn.metrics.pairwise import euclidean_distances
 from matplotlib import pyplot as plt
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -9,8 +9,8 @@ from colors import UNIQUE_COLORS
 def apply_mds(feature_matrix, dimensions=2, dissimilarity_measure='euclidean', metric=True):
     # we can play around with different parameters here, e.g. metrics, seed, dissimilarity
     if dissimilarity_measure == 'precomputed':
-        # similarities = euclidean_distances(feature_matrix)
-        similarities = 1 - cosine_similarity(feature_matrix)
+        similarities = euclidean_distances(feature_matrix)
+        # similarities = 1 - cosine_similarity(feature_matrix)
         print('distance similarities')
         print(similarities)
         mds = manifold.MDS(metric=metric, n_components=dimensions, max_iter=3000, eps=1e-9,
